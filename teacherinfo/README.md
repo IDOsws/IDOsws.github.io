@@ -1,11 +1,35 @@
 ![logo](../img/logo.png)
 # __🏣IDO事務所老师信息综合平台__
 <div align="center">
-  <img src="../img/ls_background.jpg" alt="居中图片" width="800">
+  <img src="../img/ls_background.jpg" alt="背景图" width="800">
 </div>
 
+## 雁塔区
+### 高新
+🔴[[湘妹子]]() 🔴[[诗雅]]() 🔴[[小可爱]]() 🔴[[林宝儿]]()
 
+### 电子正街
+🔴[[诺诺]]() ⭕️[[晚风芊芊]]() ⭕️[[西西]]()
 
-- [x] #739
-- [ ] https://github.com/octo-org/octo-repo/issues/740
-- [ ] Add delight to the experience when all tasks are complete :tada:
+### 吉祥村
+🔴[[湘妹子]]() ⭕️[[湘妹子]]() ⭕️[[湘妹子]]()
+
+### 电视塔
+🔴[[舒涵]]() ⭕️[[杨玉环]]() ⭕️[[星月]]()
+
+### 曲江
+🔴[[清欢]](qujiang_qinghuan/qinghuan.html) ⭕️[[九歌]]() ⭕️[[小糯米]]()
+
+## 碑林区
+
+## 莲湖区
+
+## 未央区
+
+## 新城区
+
+## 长安区
+
+## 灞桥区
+
+## 只上门
