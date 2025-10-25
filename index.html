@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="东郊到家 - 专业技师上门服务，提供按摩、推拿、理疗等服务">
+    <title>东郊到家 - 专业技师上门服务</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💆</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --dark-color: #333;
+            --light-color: #f5f5f5;
+            --text-color: #333;
+            --text-light: #666;
+            --shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #ff8e53);
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffeaa7;
+        }
+        
+        .auth-buttons button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .auth-buttons button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 登录模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .login-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .login-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .login-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .login-form {
+            display: none;
+        }
+        
+        .login-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background: #ff5252;
+        }
+        
+        .wechat-login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .wechat-qr {
+            width: 180px;
+            height: 180px;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            border: 1px solid #eee;
+        }
+        
+        /* 主内容区样式 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        /* 技师列表样式 */
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+        
+        .technician-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .technician-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .technician-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .tech-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .tech-info {
+            padding: 15px;
+        }
+        
+        .tech-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .tech-specialty {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .tech-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        .rating-value {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .review-count {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .tech-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        /* 评论区域样式 */
+        .reviews-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+        
+        .review-form {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .rating-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .rating-input label {
+            margin-right: 10px;
+        }
+        
+        .star-rating {
+            display: flex;
+            direction: row-reverse;
+            justify-content: flex-end;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffc107;
+        }
+        
+        .review-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 15px;
+        }
+        
+        .submit-review {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .reviews-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .review-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .review-user {
+            font-weight: bold;
+        }
+        
+        .review-date {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .review-stars {
+            color: #ffc107;
+            margin-bottom: 5px;
+        }
+        
+        /* 底部样式 */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+            }
+            
+            .auth-buttons {
+                margin-top: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i>💆</i> 东郊到家
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#technicians">技师列表</a></li>
+                        <li><a href="#reviews">用户评价</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button id="loginBtn">登录/注册</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 登录模态框 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="login-tabs">
+                <div class="login-tab active" data-tab="phone">手机登录</div>
+                <div class="login-tab" data-tab="wechat">微信登录</div>
+            </div>
+            
+            <!-- 手机登录表单 -->
+            <div class="login-form active" id="phoneLogin">
+                <div class="form-group">
+                    <label for="phone">手机号</label>
+                    <input type="tel" id="phone" placeholder="请输入手机号">
+                </div>
+                <div class="form-group">
+                    <label for="code">验证码</label>
+                    <div style="display: flex;">
+                        <input type="text" id="code" placeholder="请输入验证码" style="flex: 1; margin-right: 10px;">
+                        <button style="white-space: nowrap; background: #f0f0f0; border: 1px solid #ddd; padding: 0 15px; border-radius: 5px; cursor: pointer;">获取验证码</button>
+                    </div>
+                </div>
+                <button class="login-btn" id="phoneLoginBtn">登录</button>
+            </div>
+            
+            <!-- 微信登录 -->
+            <div class="login-form" id="wechatLogin">
+                <div class="wechat-login">
+                    <p>请使用微信扫描二维码登录</p>
+                    <div class="wechat-qr">
+                        <!-- 这里应该是微信二维码 -->
+                        <div style="text-align: center;">
+                            <div style="font-size: 80px;">📱</div>
+                            <p style="margin-top: 10px; color: #666;">微信扫码</p>
+                        </div>
+                    </div>
+                    <p>扫码后关注公众号完成登录</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="container">
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <h1>专业技师上门服务</h1>
+            <p>足不出户，享受专业按摩、推拿、理疗服务，缓解疲劳，提升生活品质</p>
+            <div class="search-box">
+                <input type="text" placeholder="搜索服务或技师...">
+                <button>搜索</button>
+            </div>
+        </section>
+
+        <!-- 技师列表 -->
+        <section id="technicians">
+            <h2 class="section-title">推荐技师</h2>
+            <div class="technician-list">
+                <!-- 技师卡片1 -->
+                <div class="technician-card">
+                    <div class="tech-image" style="background-image: url('https://images.unsplash.com/photo-1559599101-f09722fb4948?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="tech-info">
+                        <div class="tech-name">张技师</div>
+                        <div class="tech-specialty">中医推拿 / 足底按摩</div>
+                        <div class="tech-rating">
+                            <div class="stars">★★★★★</div>
+                            <div class="rating-value">4.9</div>
+                            <div class="review-count">(128评价)</div>
+                        </div>
+                        <div class="tech-price">¥198/次</div>
+                    </div>
+                </div>
+                
+                <!-- 技师卡片2 -->
+                <div class="technician-card">
+                    <div class="tech-image" style="background-image: url('https://images.unsplash.com/photo-1584467735871-8db9ac8d0286?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="tech-info">
+                        <div class="tech-name">李技师</div>
+                        <div class="tech-specialty">泰式按摩 / 精油SPA</div>
+                        <div class="tech-rating">
+                            <div class="stars">★★★★☆</div>
+                            <div class="rating-value">4.7</div>
+                            <div class="review-count">(96评价)</div>
+                        </div>
+                        <div class="tech-price">¥228/次</div>
+                    </div>
+                </div>
+                
+                <!-- 技师卡片3 -->
+                <div class="technician-card">
+                    <div class="tech-image" style="background-image: url('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="tech-info">
+                        <div class="tech-name">王技师</div>
+                        <div class="tech-specialty">经络疏通 / 肩颈调理</div>
+                        <div class="tech-rating">
+                            <div class="stars">★★★★★</div>
+                            <div class="rating-value">4.8</div>
+                            <div class="review-count">(152评价)</div>
+                        </div>
+                        <div class="tech-price">¥168/次</div>
+                    </div>
+                </div>
+                
+                <!-- 技师卡片4 -->
+                <div class="technician-card">
+                    <div class="tech-image" style="background-image: url('https://images.unsplash.com/photo-1594824947933-d0501ba2fe65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="tech-info">
+                        <div class="tech-name">赵技师</div>
+                        <div class="tech-specialty">产后康复 / 骨盆矫正</div>
+                        <div class="tech-rating">
+                            <div class="stars">★★★★☆</div>
+                            <div class="rating-value">4.6</div>
+                            <div class="review-count">(87评价)</div>
+                        </div>
+                        <div class="tech-price">¥258/次</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评论区域 -->
+        <section class="reviews-section" id="reviews">
+            <h2 class="section-title">用户评价</h2>
+            
+            <!-- 评论表单 -->
+            <div class="review-form">
+                <div class="rating-input">
+                    <label>评分:</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                <textarea class="review-input" placeholder="请输入您的评价..."></textarea>
+                <button class="submit-review">提交评价</button>
+            </div>
+            
+            <!-- 评论列表 -->
+            <div class="reviews-list">
+                <!-- 评论1 -->
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-user">用户158****1234</div>
+                        <div class="review-date">2023-10-15</div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-content">张技师手法专业，服务态度非常好，按摩后全身轻松，强烈推荐！</div>
+                </div>
+                
+                <!-- 评论2 -->
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-user">用户139****5678</div>
+                        <div class="review-date">2023-10-12</div>
+                    </div>
+                    <div class="review-stars">★★★★☆</div>
+                    <div class="review-content">李技师的泰式按摩很到位，力度适中，下次还会预约。</div>
+                </div>
+                
+                <!-- 评论3 -->
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-user">用户136****9012</div>
+                        <div class="review-date">2023-10-08</div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-content">王技师对肩颈问题的调理非常专业，我的颈椎问题有明显改善。</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">服务理念</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>服务项目</h3>
+                    <ul>
+                        <li><a href="#">中医推拿</a></li>
+                        <li><a href="#">足底按摩</a></li>
+                        <li><a href="#">泰式按摩</a></li>
+                        <li><a href="#">精油SPA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>帮助中心</h3>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">服务流程</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">用户协议</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li>客服电话: 400-123-4567</li>
+                        <li>服务时间: 9:00-22:00</li>
+                        <li>邮箱: service@dongjiao.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 东郊到家 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 登录模态框控制
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.getElementById('closeModal');
+        const loginTabs = document.querySelectorAll('.login-tab');
+        const loginForms = document.querySelectorAll('.login-form');
+        
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+        
+        // 切换登录方式
+        loginTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // 更新活跃标签
+                loginTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // 显示对应表单
+                loginForms.forEach(form => {
+                    form.classList.remove('active');
+                    if (form.id === `${tabId}Login`) {
+                        form.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // 模拟登录功能
+        document.getElementById('phoneLoginBtn').addEventListener('click', () => {
+            const phone = document.getElementById('phone').value;
+            const code = document.getElementById('code').value;
+            
+            if (!phone || !code) {
+                alert('请填写手机号和验证码');
+                return;
+            }
+            
+            // 模拟登录成功
+            alert('登录成功！');
+            loginModal.style.display = 'none';
+            document.getElementById('loginBtn').textContent = '用户中心';
+        });
+        
+        // 评论提交功能
+        document.querySelector('.submit-review').addEventListener('click', () => {
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const reviewText = document.querySelector('.review-input').value;
+            
+            if (!rating) {
+                alert('请选择评分');
+                return;
+            }
+            
+            if (!reviewText) {
+                alert('请输入评价内容');
+                return;
+            }
+            
+            // 创建新评论
+            const reviewsList = document.querySelector('.reviews-list');
+            const newReview = document.createElement('div');
+            newReview.className = 'review-item';
+            
+            const stars = '★'.repeat(rating.value) + '☆'.repeat(5 - rating.value);
+            const date = new Date().toISOString().split('T')[0];
+            
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <div class="review-user">用户${String(Math.random()).substr(2, 4)}****${String(Math.random()).substr(2, 4)}</div>
+                    <div class="review-date">${date}</div>
+                </div>
+                <div class="review-stars">${stars}</div>
+                <div class="review-content">${reviewText}</div>
+            `;
+            
+            // 将新评论添加到列表顶部
+            reviewsList.insertBefore(newReview, reviewsList.firstChild);
+            
+            // 重置表单
+            document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.querySelector('.review-input').value = '';
+            
+            alert('评价提交成功！');
+        });
+    </script>
+</body>
+</html>
