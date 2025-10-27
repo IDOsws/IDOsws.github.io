@@ -11,6 +11,9 @@
   <img src="img/ainimamaipi.gif" alt="爱锤子" width="300">
 </div>
 
+![爱情](img/zheshiaiqing.gif)
+![爱锤子](img/ainimamaipi.gif)
+
 
 
 
