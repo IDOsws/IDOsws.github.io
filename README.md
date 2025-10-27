@@ -1,9 +1,6 @@
 ![logo](img/logo.png)
 
-### __IDO事務所老师信息|车评展示系统__ 
-
-
-#### __[[主页]](https://idosws.github.io/)__     
+### __IDO事務所老师信息|车评展示 [[主页]](https://idosws.github.io/)__     
 
 
 
