@@ -13,4 +13,4 @@
 
 
 
-![logo](../img/logo-small.png)
+![logo](img/logo-small.png)
