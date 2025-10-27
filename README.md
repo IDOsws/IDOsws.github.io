@@ -3,9 +3,9 @@
 ### __IDO事務所老师信息|车评展示 [[主页]](https://idosws.github.io/)__     
 
 
-´´´
+```
 __“当我遇见了喜欢的老师，总错以为这就是爱情”__
-´´´
+```
 <div align="center">
   <img src="img/zheshiaiqing.gif" alt="爱情" width="300">
 </div>
