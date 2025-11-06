@@ -20,7 +20,10 @@
   <img src="img/ainimamaipi.gif" alt="爱锤子" width="300">
 </div>
 
-
+- 晗雪老师[[晗雪](hanxue/hanxue.html)]，原车费5/8，现活动价4/7，活动长期，位置：凤五
+- 小小老师[[小小](gaoxinxiaoxiao/gaoxinxiaoxiao.html)]，原车费5/9，现活动价4/7，活动日期11.6-11.8，位置：高新大都会
+- 曲江TT[[TT](tt/tt.html)]进群了，为了回馈群友，即日起到12月底，原车费7/12，现车费6/11
+- 电视塔AA[[AA](aa/aa.html)]，为了回馈群里兄弟们，限时减一张，原车费6/10，现车费5/9，活动日期11.12-11.14三天
 
 
 
